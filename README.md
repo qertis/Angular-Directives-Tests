@@ -47,14 +47,14 @@ container[0].innerHTML = '';
 ```
 --
 Почему не обновляется надпись?
-```html
-<script>
+```javascript
     var app = angular.module('myapp', []).run(function ($rootScope) {
         $rootScope.variable = "Hello";
     });
     
     app.controller('Ctrl', function($scope){});
-</script>
+```
+```html
 <body ng-app="myapp">
     <p>
         <strong>Variable:</strong> {{variable}}
