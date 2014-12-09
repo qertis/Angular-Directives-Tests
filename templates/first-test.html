@@ -6,9 +6,20 @@
         }
 
         td:first-child:not(.word) {
-            width: 1em;
-            height: 1em;
             display: block;
+        }
+
+        .first-table .audio {
+            width: 20px;
+            height: 20px;
+        }
+
+        .first-table .text {
+            text-align: left;
+        }
+
+        .first-table .input {
+
         }
 
         table {
@@ -23,7 +34,6 @@
         }
 
         table input {
-            width: 50px;
             float: right;
         }
 
@@ -37,21 +47,21 @@
         }
     </style>
 
-    <table class="main-table">
+    <table class="main-table first-table">
         <tr>
             <td ng-repeat="col in columnCount">
                 <table ng-repeat="item in items"
                        ng-click="click(item)">
                     <tr ng-if="item.pos == col">
-                        <td><span ng-if="showAudio">
+                        <td class="audio"><span ng-if="showAudio">
                                 <img class="icon-sounc"
                                      src="http://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg"
                                      alt="sound">
                             </span></td>
-                        <td><span ng-if="showText"
+                        <td class="text"><span ng-if="showText"
                                   ng-bind-html="item.text">
                             </span></td>
-                        <td><span ng-if="showInput">
+                        <td class="input"><span ng-if="showInput">
                                 <input ng-model="item.message"/>
                             </span></td>
                     </tr>
