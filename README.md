@@ -3,14 +3,16 @@ Angular-Directives-Tests
 
 Задания:
 1. Необходимо вывести в консоль с интервалом в секунду квадрат чисел от 2 до 5, исправьте код, какая основная его ошибка?:
-for (var i = 0; i <= 5; i++) {
+<pre>
+  for (var i = 0; i <= 5; i++) {
   setTimeout(function() {
     console.log(i * i);
   }, 1);
 }
+</pre>
 
 -> Здесь несколько ошибок. Первая - не используется замыкание, поэтому функция setTimeout отрабатывает неверно. Вторая ошибка - время выполнения написано неправильно, в данном случае, правильный код будет выглядеть так: 
-
+<pre>
 for(var i = 0; i <= 5; ++i) {
 	(function(i) { 
 		setTimeout(function() {
@@ -18,15 +20,17 @@ for(var i = 0; i <= 5; ++i) {
 		}, 1000)
 	}(i))
 }
-
+</pre>
 --
 2. Чем плох этот код?
+<pre>
 var container = $('#container);
 $('<span/>')
 .append(new Array(1000).join(‘lorem ipsum’))
 .click(function() { })
 .appendTo(container)
 container[0].innerHTML = '';
+</pre>
 
 -> Здесь используется jQuery. Рассмотрим код построчно:
 /* Не используется правильный <a href="http://blog.baskovsky.ru/2013/09/javascript-jquery-style-guide.html"> стиль написания jQuery </a>. Переменные обернутые jQuery, по-хорошему должны именоваться, например так: 
