@@ -1,0 +1,62 @@
+<div>
+    <style>
+        .icon-sounc {
+            width: 100%;
+            height: auto;
+        }
+
+        td:first-child:not(.word) {
+            width: 1em;
+            height: 1em;
+            display: block;
+        }
+
+        table {
+            width: 200px;
+        }
+
+        .main-table {
+            background-color: #fff;
+            padding: .5em;
+            border: 1px solid #ccc;
+            box-shadow: 0px 1px 0px 0 #cce;
+        }
+
+        table input {
+            width: 50px;
+            float: right;
+        }
+
+        table li {
+            display: inline-table;
+        }
+
+        table td {
+            vertical-align: top;
+            text-align: left;
+        }
+    </style>
+
+    <table class="main-table">
+        <tr>
+            <td ng-repeat="col in columnCount">
+                <table ng-repeat="item in items"
+                       ng-click="click(item)">
+                    <tr ng-if="item.pos == col">
+                        <td><span ng-if="showAudio">
+                                <img class="icon-sounc"
+                                     src="http://upload.wikimedia.org/wikipedia/commons/2/21/Speaker_Icon.svg"
+                                     alt="sound">
+                            </span></td>
+                        <td><span ng-if="showText"
+                                  ng-bind-html="item.text">
+                            </span></td>
+                        <td><span ng-if="showInput">
+                                <input ng-model="item.message"/>
+                            </span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

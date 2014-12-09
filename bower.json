@@ -1,0 +1,22 @@
+{
+  "name": "test-angular",
+  "version": "0.0.1",
+  "authors": [
+    "qertis"
+  ],
+  "keywords": [
+    "angular",
+    "drag-n-drop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-native-dragdrop": "1.0.6"
+  }
+}
