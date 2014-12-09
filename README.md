@@ -1,18 +1,18 @@
 Angular-Directives-Tests
 ========================
 
-Задания:
+## Задания
 1. Необходимо вывести в консоль с интервалом в секунду квадрат чисел от 2 до 5, исправьте код, какая основная его ошибка?:
-<pre>
+```javascript
   for (var i = 0; i <= 5; i++) {
   setTimeout(function() {
     console.log(i * i);
   }, 1);
 }
-</pre>
+```
 
 -> Здесь несколько ошибок. Первая - не используется замыкание, поэтому функция setTimeout отрабатывает неверно. Вторая ошибка - время выполнения написано неправильно, в данном случае, правильный код будет выглядеть так: 
-<pre>
+```javascript
 for(var i = 0; i <= 5; ++i) {
 	(function(i) { 
 		setTimeout(function() {
@@ -20,19 +20,20 @@ for(var i = 0; i <= 5; ++i) {
 		}, 1000)
 	}(i))
 }
-</pre>
+```
 --
 2. Чем плох этот код?
-<pre>
+```javascript
 var container = $('#container);
 $('<span/>')
 .append(new Array(1000).join(‘lorem ipsum’))
 .click(function() { })
 .appendTo(container)
 container[0].innerHTML = '';
-</pre>
+```
 
 -> Здесь используется jQuery. Рассмотрим код построчно:
+```javascript
 /* Не используется правильный <a href="http://blog.baskovsky.ru/2013/09/javascript-jquery-style-guide.html"> стиль написания jQuery </a>. Переменные обернутые jQuery, по-хорошему должны именоваться, например так: 
 $container = $('#container')
 */
@@ -49,12 +50,29 @@ $('<span/>')
 
 /* Используя jQuery лучше делать container.html('') */
 container[0].innerHTML = '';
-
+```
 --
 3. Почему не обновляется надпись?
-
-&lt;script&gt;<br/>    var app = angular.module(&#39;myapp&#39;, []).run(function ($rootScope) {<br/>        $rootScope.variable = &quot;Hello&quot;;<br/>    });<br/>    <br/>    app.controller(&#39;Ctrl&#39;, function($scope){});<br/>&lt;/script&gt;<br/>&lt;body ng-app=&quot;myapp&quot;&gt;<br/>    &lt;p&gt;<br/>        &lt;strong&gt;Variable:&lt;/strong&gt; {{variable}}<br/>    &lt;/p&gt;<br/>    <br/>    &lt;div ng-controller=&quot;Ctrl&quot;&gt;<br/>        &lt;p&gt;<br/>            &lt;strong&gt;Variable:&lt;/strong&gt; &lt;input type=&quot;text&quot; ng-model=&quot;variable&quot;/&gt;<br/>        &lt;/p&gt;<br/>    &lt;/div&gt;    <br/>&lt;/body&gt;
-
+```html
+<script>
+    var app = angular.module('myapp', []).run(function ($rootScope) {
+        $rootScope.variable = "Hello";
+    });
+    
+    app.controller('Ctrl', function($scope){});
+</script>
+<body ng-app="myapp">
+    <p>
+        <strong>Variable:</strong> {{variable}}
+    </p>
+    
+    <div ng-controller="Ctrl">
+        <p>
+            <strong>Variable:</strong> <input type="text" ng-model="variable"/>
+        </p>
+    </div>    
+</body>
+```
 -> Потому-что переменная variable находится вне текущего контроллера ng-controller="Ctrl"
 Чтобы пример работал, надо надо перенести ng-controller="Ctrl" в body
 
@@ -74,5 +92,8 @@ container[0].innerHTML = '';
 
 ---
 
-Install: 
+# License
+MIT
+
+## Install: 
 bower install
