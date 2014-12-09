@@ -1,6 +1,74 @@
 Angular-Directives-Tests
 ========================
 
-Install: bower install
+Задания:
+1. Необходимо вывести в консоль с интервалом в секунду квадрат чисел от 2 до 5, исправьте код, какая основная его ошибка?:
+for (var i = 0; i <= 5; i++) {
+  setTimeout(function() {
+    console.log(i * i);
+  }, 1);
+}
 
-DEMO: http://goo.gl/TyW9Bs
+-> Здесь несколько ошибок. Первая - не используется замыкание, поэтому функция setTimeout отрабатывает неверно. Вторая ошибка - время выполнения написано неправильно, в данном случае, правильный код будет выглядеть так: 
+
+for(var i = 0; i <= 5; ++i) {
+	(function(i) { 
+		setTimeout(function() {
+		   console.log(i*i)
+		}, 1000)
+	}(i))
+}
+
+--
+2. Чем плох этот код?
+var container = $('#container);
+$('<span/>')
+.append(new Array(1000).join(‘lorem ipsum’))
+.click(function() { })
+.appendTo(container)
+container[0].innerHTML = '';
+
+-> Здесь используется jQuery. Рассмотрим код построчно:
+/* Не используется правильный <a href="http://blog.baskovsky.ru/2013/09/javascript-jquery-style-guide.html"> стиль написания jQuery </a>. Переменные обернутые jQuery, по-хорошему должны именоваться, например так: 
+$container = $('#container')
+*/
+var container = $('#container); 
+/* Здесь можно обойтись без закрывающего тега */
+$('<span/>') 
+
+/* В данном случае можно обойтись без ключевого слова 'new' */
+.append(new Array(1000).join(‘lorem ipsum’))  
+
+/* создания большго числа обработчиков замедляет браузер. Лучше повесить один и делать перехват по target */
+.click(function() {})
+.appendTo(container)
+
+/* Используя jQuery лучше делать container.html('') */
+container[0].innerHTML = '';
+
+--
+3. Почему не обновляется надпись?
+
+&lt;script&gt;<br/>    var app = angular.module(&#39;myapp&#39;, []).run(function ($rootScope) {<br/>        $rootScope.variable = &quot;Hello&quot;;<br/>    });<br/>    <br/>    app.controller(&#39;Ctrl&#39;, function($scope){});<br/>&lt;/script&gt;<br/>&lt;body ng-app=&quot;myapp&quot;&gt;<br/>    &lt;p&gt;<br/>        &lt;strong&gt;Variable:&lt;/strong&gt; {{variable}}<br/>    &lt;/p&gt;<br/>    <br/>    &lt;div ng-controller=&quot;Ctrl&quot;&gt;<br/>        &lt;p&gt;<br/>            &lt;strong&gt;Variable:&lt;/strong&gt; &lt;input type=&quot;text&quot; ng-model=&quot;variable&quot;/&gt;<br/>        &lt;/p&gt;<br/>    &lt;/div&gt;    <br/>&lt;/body&gt;
+
+-> Потому-что переменная variable находится вне текущего контроллера ng-controller="Ctrl"
+Чтобы пример работал, надо надо перенести ng-controller="Ctrl" в body
+
+--
+4. Напишите конфигурируемую директиву (AngularJS):
+Необходима директива которая в зависимости от конфигурации будет
+добавлять/убирать: иконку аудио, текст, поле ввода текста. Должна быть возможность
+настроить количество колонок, текст должен поддерживать и передаваемый html.
+
+6.  Расширьте написанную ранее директиву, либо создайте на её основе новую, с возможностью перечислить под ней варианты ответов и добавить поля для “drag and drop”; введите возможность перетаскивать в эти поля варианты ответов.
+
+-> DEMO: http://goo.gl/TyW9Bs
+
+7.  Представьте что Вам необходимо вывести не одну, а несколько разных директив с разными конфигурациями; количество директив и их конфигурации зависят от ответа сервера. Ваше решение?
+
+-> Сперва потребуется загружать необходимые файлы и шаблоны с сервера, например, помощью provider. После их загрузки потребуется сделать config и сделать компиляцию шаблонов.
+
+---
+
+Install: 
+bower install
