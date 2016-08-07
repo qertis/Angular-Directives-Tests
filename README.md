@@ -36,7 +36,7 @@ container[0].innerHTML = '';
 ```javascript
 $container = $('#container')
 ///...
-var container = $('#container); 
+var container = $('#container'); 
 $('<span/>')/* Здесь можно обойтись без закрывающего тега */
 .append(new Array(1000).join('lorem ipsum'))/* В данном случае можно обойтись без ключевого слова 'new' */
 .click(function() {})/* создания большго числа обработчиков замедляет браузер. Лучше повесить один и делать перехват по target */
@@ -81,10 +81,10 @@ container[0].innerHTML = '';/* Используя jQuery лучше делать
 
 --
 
-## License
-MIT
-
 ## Install: 
 ```sh
 bower install
 ```
+
+## License
+MIT
